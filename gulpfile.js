@@ -22,6 +22,7 @@ var production  = {
 
 var gulp 			= require('gulp'),
 	fs 				= require('fs'),
+	babel 			= require('gulp-babel'),
 	BS 				= require('browser-sync').create(),
 	autoprefixer 	= require('gulp-autoprefixer'),
 	concat 			= require('gulp-concat'),
@@ -184,9 +185,11 @@ function js() {
   return gulp.src(development.js)
 	.pipe(plumber({errorHandler: onErr}))
 	.pipe(concat('script.min.js'))
+	.pipe(babel())
 	.pipe(uglify())
-	.pipe(gulpif(onMaps, sourcemaps.init()))
-	.pipe(gulpif(onMaps,sourcemaps.write()))
+
+	// .pipe(gulpif(onMaps, sourcemaps.init()))
+	// .pipe(gulpif(onMaps,sourcemaps.write()))
 	.pipe(gulp.dest(production.js))
 	.pipe(BS.stream())
 };

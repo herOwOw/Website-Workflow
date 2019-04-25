@@ -187,9 +187,8 @@ function js() {
 	.pipe(concat('script.min.js'))
 	.pipe(babel())
 	.pipe(uglify())
-
-	// .pipe(gulpif(onMaps, sourcemaps.init()))
-	// .pipe(gulpif(onMaps,sourcemaps.write()))
+	.pipe(gulpif(onMaps, sourcemaps.init()))
+	.pipe(gulpif(onMaps,sourcemaps.write()))
 	.pipe(gulp.dest(production.js))
 	.pipe(BS.stream())
 };
